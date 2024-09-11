@@ -66,8 +66,8 @@ class RedColorDetector {
               saturation > 0.5 &&
               value > 0.3) {
             // Calculate red intensity as a percentage
-            final redIntensity = (red / 255) * 100;
-            redIntensities.add(redIntensity);
+            // final redIntensity = (red / 255) * 100;
+            redIntensities.add(red.toDouble());
 
             // Convert HSV to HSL to get the lightness percentage
             final lightness = _hsvToLightness(hue, saturation, value) * 100;

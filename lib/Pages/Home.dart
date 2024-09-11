@@ -30,9 +30,16 @@ class _RedHomeState extends State<RedHome> {
   double? redLightness;
   bool isProcessing = false;
 
+  double? hctImageHeight;
+  double? hctImageWidth;
+
+  double? hct_redIntensity;
+  double? hct_redLightness;
+
   String PTResult = "Result";
   String HCTResult = "Result";
-  String Diagnosis = "";
+  String PTDiagnosis = "";
+  String HCTDiagnosis = "";
 
   final ImagePicker _picker = ImagePicker();
   final PTINRCalculator _ptinrCalculator = PTINRCalculator();
@@ -75,11 +82,43 @@ class _RedHomeState extends State<RedHome> {
         redIntensity = intensity['averageRedIntensity'];
         redLightness = intensity['averageRedLightness'];
         isProcessing = false;
-        Diagnosis =
-            "PT Image Height = $ptImageHeight \nPT Image Width = $ptImageWidth \nRed Intensity = $redIntensity";
+        PTDiagnosis =
+            "PT Image Height = $ptImageHeight \nPT Image Width = $ptImageWidth \nRed Intensity = $redIntensity\n";
 
         PTResult = (1.3214 + 0.0057 * PT_Distance + -0.0019 * redIntensity!)
-            .toString();
+            .toStringAsFixed(2);
+      });
+    }
+  }
+
+  Future<void> _calculateHCT() async {
+    if (_hctImage != null) {
+      setState(() {
+        isCalculating = true;
+      });
+
+      // Call the function from PTINRCalculator
+      final length =
+          await _ptinrCalculator.calculatePTINRDimensions(_hctImage!);
+      final intensity = await _redColorDetector.processImage(_hctImage!);
+
+      setState(() {
+        hctImageHeight = length['height'];
+        hctImageWidth = length['width'];
+
+        double HCT_Distance = hctImageWidth! / (hctImageHeight! / 2);
+
+        isCalculating = false;
+
+        hct_redIntensity = intensity['averageRedIntensity'];
+        hct_redLightness = intensity['averageRedLightness'];
+        isProcessing = false;
+        HCTDiagnosis =
+            "HCT Image Height = $hctImageHeight \nHCT Image Width = $hctImageWidth \nRed Intensity = $hct_redIntensity";
+
+        HCTResult =
+            (13.6858 + 0.0304 * HCT_Distance + -0.0098 * hct_redIntensity!)
+                .toStringAsFixed(2);
       });
     }
   }
@@ -207,7 +246,7 @@ class _RedHomeState extends State<RedHome> {
                                   SizedBox(
                                     height: 40,
                                     child: GestureDetector(
-                                      onTap: () {},
+                                      onTap: _calculateHCT,
                                       child: Container(
                                           decoration: BoxDecoration(
                                             borderRadius:
@@ -249,7 +288,7 @@ class _RedHomeState extends State<RedHome> {
                                               0.4,
                                           child: Text(
                                             textAlign: TextAlign.center,
-                                            "Result",
+                                            HCTResult,
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
@@ -323,7 +362,7 @@ class _RedHomeState extends State<RedHome> {
                                 padding: EdgeInsets.only(top: 8.0),
                                 child: SizedBox(
                                     width: MediaQuery.of(context).size.width,
-                                    child: Text(Diagnosis)),
+                                    child: Text(PTDiagnosis + HCTDiagnosis)),
                               ),
                             ],
                           ),
