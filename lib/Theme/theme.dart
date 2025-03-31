@@ -5,7 +5,7 @@ ThemeData lightMode = ThemeData(
     backgroundColor: Colors.white,
   ),
   brightness: Brightness.light,
-  fontFamily: "Nunito",
+  fontFamily: "Montserrat",
   colorScheme: ColorScheme.light(
     surface: Colors.white,
     primary: Colors.grey.shade200,

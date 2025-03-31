@@ -40,12 +40,15 @@ dependencies:
   shared_preferences: ^2.3.2
 
   file_picker: ^8.1.2
-  tflite_v2: ^1.0.0
-  image: ^4.0.17
-  image_picker: ^1.1.2
-  tflite_flutter: ^0.11.0
+
+  image: ^3.3.0
+  image_picker: ^0.8.9
+  flutter_tflite: ^1.0.1
   page_transition: ^2.1.0
   provider: ^6.1.2
+  flutter_launcher_icons: ^0.11.0
+  toggle_switch: ^2.3.0
+  loading_animation_widget: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -87,15 +90,14 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Pacifico
+    - family: Montserrat
       fonts:
-        - asset: lib/fonts/Pacifico-Regular.ttf
-
-    - family: Nunito
-      fonts:
-        - asset: lib/fonts/Nunito-Regular.ttf
-        - asset: lib/fonts/Nunito-Italic.ttf
+        - asset: assets/Font/Montserrat-Regular.otf
+        - asset: assets/Font/Montserrat-Italic.otf
           style: italic
+        - asset: assets/Font/Montserrat-SemiBold.otf
+          weight: 700
+
   # fonts:
   #   - family: Schyler
   #     fonts:

@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:provider/provider.dart';
 import 'package:ptinr/Pages/Home.dart';
 import 'package:ptinr/Pages/SplashScreen.dart';
+import 'package:ptinr/Pages/test.dart';
 import 'package:ptinr/Theme/theme_provider.dart';
 
 void main() async {
@@ -25,12 +26,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'PTINR Finder',
+      title: 'PromPT iNR',
       theme: Provider.of<ThemeProvider>(context).themeData,
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => SplashScreen(),
-        '/redhome': (context) => RedHome(),
+        '/redhom': (context) => RedHome(),
       },
     );
   }

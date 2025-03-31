@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:ptinr/Pages/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen() : super();
@@ -20,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void goToNext() {
     Timer(
-      Duration(seconds: 2),
+      Duration(seconds: 5),
       () async => Navigator.pushReplacement(
         context,
         PageTransition(
@@ -35,6 +37,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/BG.png'), fit: BoxFit.cover)),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,9 +52,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Image.asset("assets/logo.png"),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 100.0),
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.white,
+                padding: EdgeInsets.only(top: 20.0),
+                child: LoadingAnimationWidget.prograssiveDots(
+                  color: Color.fromARGB(255, 46, 125, 124),
+                  size: 50,
                 ),
               )
             ],

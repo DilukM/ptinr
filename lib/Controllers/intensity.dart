@@ -51,9 +51,9 @@ class RedColorDetector {
           final pixel = processedImage.getPixel(x, y);
 
           // Extract red, green, and blue values
-          final red = pixel.r.toInt();
-          final green = pixel.g.toInt();
-          final blue = pixel.b.toInt();
+          final red = img.getRed(pixel);
+          final green = img.getGreen(pixel);
+          final blue = img.getBlue(pixel);
 
           // Convert RGB to HSV
           final hsv = _rgbToHsv(red, green, blue);

@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
         tools:replace="android:label"
-        android:label="PTINR Finder"
+        android:label="PromPT iNR"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
          <service
